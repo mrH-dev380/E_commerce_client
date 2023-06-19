@@ -73,7 +73,7 @@ p {
 .dropdown-menu {
   background-color: var(--black-background);
   width: 100%;
-  transform: translate(0, 47px) !important;
+  transform: translate(0, 45px) !important;
 }
 
 .dropdown-item {

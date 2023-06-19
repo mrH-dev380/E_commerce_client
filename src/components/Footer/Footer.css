@@ -1,0 +1,14 @@
+footer {
+  background-color: var(--categories-background);
+}
+
+footer:not(first-child) {
+  border-top: 1px solid var(--black-border);
+}
+
+footer .input-group-text {
+  background-color: var(--categories-background);
+  color: white;
+  padding: 8px 17px;
+  text-transform: uppercase;
+}
