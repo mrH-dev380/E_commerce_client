@@ -6,15 +6,15 @@ const Footer = () => {
   return (
     <>
       <footer className="py-4">
-        <div className="container-xxl">
+        <div className="container-xl">
           <div className="row align-items-center">
-            <div className="col-5">
+            <div className="col-4">
               <div className="footer-top d-flex gap-30 align-items-center">
                 <img src="images/newsletter.png" alt="newsletter" />
                 <h2 className="mb-0 text-white">Sign Up for Newsletter</h2>
               </div>
             </div>
-            <div className="col-7">
+            <div className="col-8">
               <div className="input-group">
                 <input
                   type="text"
@@ -32,8 +32,8 @@ const Footer = () => {
         </div>
       </footer>
       <footer className="py-4">
-        <div className="container-xxl">
-          <div className="row">
+        <div className="container-xl">
+          <div className="row d-flex align-items-start">
             <div className="col-4">
               <h4 className="text-white mb-4">Contact Us</h4>
               <div className="footer-link d-flex flex-column">
@@ -109,7 +109,7 @@ const Footer = () => {
         </div>
       </footer>
       <footer className="py-4">
-        <div className="container-xxl">
+        <div className="container-xl">
           <div className="row">
             <div className="col-12">
               <p className="text-center mb-0 text-white">

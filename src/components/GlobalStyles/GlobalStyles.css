@@ -1,10 +1,14 @@
 @import 'normalize.css';
 
 :root {
-  --black-background: #131921;
+  --black-color: #131921;
   --black-border: #3b4149;
   --categories-background: #232f3e;
   --text-hover: #febd69;
+  --highlight-color: #bf4800;
+  --grey-background: #f5f5f7;
+  --grey-text: #777777;
+  --split-color: #ededed;
 }
 
 * {
@@ -35,4 +39,28 @@ a {
 
 .gap-30 {
   gap: 30px;
+}
+
+.button {
+  background-color: var(--categories-background);
+  color: white;
+  font-size: 14px;
+  padding: 13px 33px;
+  border-radius: 25px;
+}
+
+.button:hover {
+  background-color: var(--text-hover);
+  color: var(--background-color);
+}
+
+.container-xl {
+  width: 1200px;
+}
+
+.section-heading {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 500;
+  margin-bottom: 30px;
 }

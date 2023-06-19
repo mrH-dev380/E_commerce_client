@@ -6,10 +6,10 @@ const Header = () => {
   return (
     <>
       <header className="header-top-strip py-2">
-        <div className="container-xxl">
+        <div className="container-xl">
           <div className="row">
             <div className="col-6">
-              <p className="text-white mb-0">
+              <p className="text-white text-start mb-0">
                 Free Shipping Over $100 & Free Return
               </p>
             </div>
@@ -22,11 +22,13 @@ const Header = () => {
         </div>
       </header>
       <header className="header-upper py-2">
-        <div className="container-xxl">
+        <div className="container-xl">
           <div className="row">
             <dix className="col-2">
               <h2>
-                <Link className="text-white">Dev Corner</Link>
+                <Link className="text-white d-block text-start">
+                  Dev Corner
+                </Link>
               </h2>
             </dix>
             <dix className="col-5">
@@ -92,7 +94,7 @@ const Header = () => {
         </div>
       </header>
       <header className="header-categories py-2">
-        <div className="container-xxl">
+        <div className="container-xl">
           <div className="row">
             <div className="col-12">
               <div className="menu-lists gap-30">

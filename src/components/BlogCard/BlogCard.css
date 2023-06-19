@@ -1,0 +1,56 @@
+.blog-card {
+  background-color: white;
+
+  border-radius: 10px;
+}
+
+.blog-card img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.blog-content {
+  padding: 15px;
+}
+
+.blog-content .date {
+  display: block;
+  text-align: left;
+  font-size: 13px;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--grey-text);
+  padding: 0;
+}
+
+.blog-content h5 {
+  display: block;
+  text-align: left;
+  font-size: 18px;
+  color: var(--black-color);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.blog-content p.desc {
+  display: block;
+  text-align: left;
+  font-size: 13px;
+  line-height: 22px;
+  height: 44px;
+  color: var(--grey-text);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.blog-content a {
+  display: inline-block;
+  position: relative;
+  left: 46%;
+}

@@ -1,5 +1,5 @@
 .header-top-strip {
-  background-color: var(--black-background);
+  background-color: var(--black-color);
   border-bottom: 1px solid var(--black-border);
 }
 
@@ -28,7 +28,7 @@ p {
 }
 
 .header-upper {
-  background-color: var(--black-background);
+  background-color: var(--black-color);
 }
 
 .form-control:focus {
@@ -64,6 +64,7 @@ p {
   font-weight: 400;
   letter-spacing: 0.3;
   text-transform: uppercase;
+  padding-left: 0;
 }
 
 .dropdown button:focus {
@@ -71,7 +72,7 @@ p {
 }
 
 .dropdown-menu {
-  background-color: var(--black-background);
+  background-color: var(--black-color);
   width: 100%;
   transform: translate(0, 45px) !important;
 }
