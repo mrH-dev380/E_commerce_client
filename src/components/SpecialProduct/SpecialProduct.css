@@ -1,0 +1,53 @@
+.special-product-card {
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.price {
+  text-align: start;
+  margin-top: 6px;
+  margin-bottom: 14px;
+}
+
+.new-price {
+  font-size: 18px;
+  color: var(--test);
+}
+
+.old-price {
+  font-size: 14px;
+  color: var(--grey-text);
+}
+
+.progress {
+  height: 4px;
+}
+
+.discount-till p {
+  color: var(--text-black);
+  font-size: 12px;
+}
+
+.badge {
+  font-size: 10px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-count p {
+  text-align: start;
+  font-size: 12px;
+  color: var(--grey-text);
+  
+}

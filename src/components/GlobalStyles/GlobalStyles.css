@@ -9,6 +9,8 @@
   --grey-background: #f5f5f7;
   --grey-text: #777777;
   --split-color: #ededed;
+  --text-black: #1c1c1b;
+  --test: #e6432f;
 }
 
 * {
@@ -47,6 +49,7 @@ a {
   font-size: 14px;
   padding: 13px 33px;
   border-radius: 25px;
+  transition: 0.3s;
 }
 
 .button:hover {

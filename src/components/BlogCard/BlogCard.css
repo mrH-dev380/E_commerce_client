@@ -37,8 +37,6 @@
 }
 
 .blog-content p.desc {
-  display: block;
-  text-align: left;
   font-size: 13px;
   line-height: 22px;
   height: 44px;
@@ -47,6 +45,8 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  display: block;
+  text-align: left;
 }
 
 .blog-content a {

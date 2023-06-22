@@ -2,10 +2,13 @@ import { Link } from 'react-router-dom'
 import Marquee from 'react-fast-marquee'
 import './Home.css'
 import BlogCard from '../../components/BlogCard/BlogCard'
+import ProductCard from '../../components/ProductCard/ProductCard'
+import SpecialProduct from '../../components/SpecialProduct/SpecialProduct'
 
 const Home = () => {
   return (
     <>
+      {/* Banner */}
       <section className="home-wrapper-1 py-5">
         <div className="container-xl">
           <div className="row">
@@ -210,18 +213,125 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {/* Featured Collection */}
+      <section className="feature-wrapper home-wrapper-2 py-5">
+        <div className="container-xl">
+          <div className="row">
+            <div className="col-12">
+              <h3 className="section-heading">Featured Collection</h3>
+            </div>
+          </div>
+          <div className="row">
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </div>
+        </div>
+      </section>
+      <section className="famous-wrapper home-wrapper-2 py-5">
+        <div className="container-xl">
+          <div className="row">
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-1.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
+                <div className="famous-content position-absolute">
+                  <h5 className="text-white">Big Screen</h5>
+                  <h6>Smart Watch Series 7</h6>
+                  <p className="text-white">From $399or $16.62/mo. for 24 mo.*</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-2.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
+                <div className="famous-content position-absolute">
+                  <h5>Big Screen</h5>
+                  <h6 className="text-dark">Smart Watch Series 7</h6>
+                  <p>From $399or $16.62/mo. for 24 mo.*</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-3.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
+                <div className="famous-content position-absolute">
+                  <h5>Big Screen</h5>
+                  <h6 className="text-dark">Smart Watch Series 7</h6>
+                  <p>From $399or $16.62/mo. for 24 mo.*</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="famous-card position-relative">
+                <img
+                  src="images/famous-4.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
+                <div className="famous-content position-absolute">
+                  <h5>Big Screen</h5>
+                  <h6 className="text-dark">Smart Watch Series 7</h6>
+                  <p>From $399or $16.62/mo. for 24 mo.*</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Special Product */}
+      <section className="special-wrapper home-wrapper-2 py-5">
+        <div className="container-xl">
+          <div className="row">
+            <div className="col-12">
+              <h3 className="section-heading">Special Products</h3>
+            </div>
+          </div>
+          <div className="row">
+            <SpecialProduct />
+            <SpecialProduct />
+            <SpecialProduct />
+            <SpecialProduct />
+            <SpecialProduct />
+            <SpecialProduct />
+          </div>
+        </div>
+      </section>
+      {/* Product Card */}
+      <section className="product-wrapper home-wrapper-2 py-5">
+        <div className="container-xl">
+          <div className="row">
+            <div className="col-12">
+              <h3 className="section-heading">Our Popular Products</h3>
+            </div>
+          </div>
+          <div className="row">
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </div>
+        </div>
+      </section>
       {/* Slider */}
       <section className="marque-wrapper home-wrapper-2 py-5">
         <div className="container-xl">
           <div className="row">
             <div className="col-12">
               <div className="marquee-inner-wrapper card-wrapper">
-                <Marquee
-                  className="d-flex"
-                  pauseOnHover={true}
-                  speed={40}
-                  gradient={true}
-                >
+                <Marquee className="d-flex" speed={40} gradient={true}>
                   <div className="mx-4 w-25">
                     <img src="images/brand-01.png" alt="brand" />
                   </div>
@@ -259,13 +369,20 @@ const Home = () => {
             <div className="col-12">
               <h3 className="section-heading">Our Latest Blogs</h3>
             </div>
-
           </div>
           <div className="row">
-            <div className="col-3"><BlogCard/></div>
-            <div className="col-3"><BlogCard/></div>
-            <div className="col-3"><BlogCard/></div>
-            <div className="col-3"><BlogCard/></div>
+            <div className="col-3">
+              <BlogCard />
+            </div>
+            <div className="col-3">
+              <BlogCard />
+            </div>
+            <div className="col-3">
+              <BlogCard />
+            </div>
+            <div className="col-3">
+              <BlogCard />
+            </div>
           </div>
         </div>
       </section>

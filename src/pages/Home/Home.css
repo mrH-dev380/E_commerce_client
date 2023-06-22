@@ -121,3 +121,36 @@
   box-shadow: 0 0 10px #0000001a;
   padding: 15px;
 }
+
+/* Famous card */
+.famous-card .famous-content {
+  top: 6%;
+  left: 5%;
+}
+
+.famous-card img {
+  border-radius: 10px;
+}
+
+.famous-content h5 {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 200;
+  color: var(--grey-text);
+  margin-bottom: 7px;
+  text-transform: uppercase;
+}
+
+.famous-content h6 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  color: white;
+}
+
+.famous-content p {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 100;
+  color: var(--grey-text);
+}
