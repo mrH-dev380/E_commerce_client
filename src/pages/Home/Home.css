@@ -67,10 +67,6 @@
 }
 
 /* Services */
-.home-wrapper-2 {
-  background-color: var(--grey-background);
-}
-
 .services p {
   color: var(--grey-text);
 }

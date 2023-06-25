@@ -1,11 +1,18 @@
+/* eslint-disable react/prop-types */
 import ReactStars from 'react-rating-stars-component'
 import './ProductCard.css'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-const ProductCard = () => {
+const ProductCard = (props) => {
+  const { grid } = props
+  let location = useLocation()
   return (
     <>
-      <div className="col-3">
+      <div
+        className={` ${
+          location.pathname == '/product' ? `gr-${grid}` : 'col-3'
+        } `}
+      >
         <Link className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             <button className="border-0 bg-transparent">
@@ -27,7 +34,7 @@ const ProductCard = () => {
           </div>
           <div className="product-image">
             <img src="images/tab.jpg" alt="" />
-            <img src="images/tab1.jpg" alt="" />
+            {/* <img src="images/tab1.jpg" alt="" /> */}
           </div>
           <div className="product-details">
             <h6 className="brand">Havels</h6>
@@ -41,6 +48,12 @@ const ProductCard = () => {
               edit={false}
               activeColor="#ffd700"
             />
+            <p className={`description ${grid === 12 ? 'd-block' : 'd-none'}`}>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt...
+            </p>
             <p className="price">$100.00</p>
           </div>
         </Link>

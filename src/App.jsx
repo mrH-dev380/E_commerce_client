@@ -1,8 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Layout from './components/Layout/Layout'
-import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
+import Layout from './Layout'
+import { publicRoutes } from '~/routes'
 
 function App() {
   return (
@@ -10,9 +8,24 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
+            {publicRoutes.map((route, index) => {
+              const Page = route.component
+
+              if (route.path === '/') {
+                return (
+                  <Route
+                    key={index}
+                    index
+                    path={route.path}
+                    element={<Page />}
+                  />
+                )
+              } else {
+                return (
+                  <Route key={index} path={route.path} element={<Page />} />
+                )
+              }
+            })}
           </Route>
         </Routes>
       </BrowserRouter>

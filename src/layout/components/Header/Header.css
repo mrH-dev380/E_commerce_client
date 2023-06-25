@@ -47,6 +47,21 @@ p {
   height: 32px;
 }
 
+.card-count {
+  top: -3px;
+  right: -12px;
+  line-height: 12px;
+  padding: 0px 6px;
+  font-size: 10px;
+  border-radius: 10px;
+  color: var(--text-hover);
+  background-color: var(--black-color);
+  border: 2px solid var(--text-hover);
+  outline: 2px solid var(--black-color);
+  outline-offset: -1px;
+  z-index: 9;
+}
+
 .menu-lists {
   display: flex;
   align-items: center;

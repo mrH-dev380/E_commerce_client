@@ -24,14 +24,12 @@ const Header = () => {
       <header className="header-upper py-2">
         <div className="container-xl">
           <div className="row">
-            <dix className="col-2">
+            <div className="col-2">
               <h2>
-                <Link className="text-white d-block text-start">
-                  Dev Corner
-                </Link>
+                <Link className="text-white d-block text-start">Dev Mr.H</Link>
               </h2>
-            </dix>
-            <dix className="col-5">
+            </div>
+            <div className="col-5">
               <div className="input-group">
                 <input
                   type="text"
@@ -48,8 +46,8 @@ const Header = () => {
                   <BsSearch className="fs-6" />
                 </span>
               </div>
-            </dix>
-            <dix className="col-5">
+            </div>
+            <div className="col-5">
               <div className="nav-link">
                 <div>
                   <Link className="d-flex align-items-center gap-10">
@@ -80,16 +78,15 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link className="d-flex align-items-center">
+                  <Link className="d-flex align-items-center position-relative">
                     <img src="images/cart.svg" className="nav-icon" alt="" />
-                    <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">$ 500</p>
+                    <div>
+                      <span className="card-count position-absolute">0</span>
                     </div>
                   </Link>
                 </div>
               </div>
-            </dix>
+            </div>
           </div>
         </div>
       </header>

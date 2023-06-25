@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Marquee from 'react-fast-marquee'
 import './Home.css'
+import Meta from '~/components/Meta'
 import BlogCard from '../../components/BlogCard/BlogCard'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import SpecialProduct from '../../components/SpecialProduct/SpecialProduct'
@@ -8,6 +9,7 @@ import SpecialProduct from '../../components/SpecialProduct/SpecialProduct'
 const Home = () => {
   return (
     <>
+      <Meta title="BWL Official" />
       {/* Banner */}
       <section className="home-wrapper-1 py-5">
         <div className="container-xl">
@@ -242,7 +244,9 @@ const Home = () => {
                 <div className="famous-content position-absolute">
                   <h5 className="text-white">Big Screen</h5>
                   <h6>Smart Watch Series 7</h6>
-                  <p className="text-white">From $399or $16.62/mo. for 24 mo.*</p>
+                  <p className="text-white">
+                    From $399or $16.62/mo. for 24 mo.*
+                  </p>
                 </div>
               </div>
             </div>
