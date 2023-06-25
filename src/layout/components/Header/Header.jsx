@@ -26,7 +26,9 @@ const Header = () => {
           <div className="row">
             <div className="col-2">
               <h2>
-                <Link className="text-white d-block text-start">Dev Mr.H</Link>
+                <Link to="/" className="text-white d-block text-start">
+                  Dev Mr.H
+                </Link>
               </h2>
             </div>
             <div className="col-5">
@@ -50,7 +52,10 @@ const Header = () => {
             <div className="col-5">
               <div className="nav-link">
                 <div>
-                  <Link className="d-flex align-items-center gap-10">
+                  <Link
+                    to="/compare-product"
+                    className="d-flex align-items-center gap-10"
+                  >
                     <img src="images/compare.svg" className="nav-icon" alt="" />
                     <p>
                       Compare <br /> Products
@@ -58,7 +63,10 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link className="d-flex align-items-center gap-10">
+                  <Link
+                    to="/wishlist"
+                    className="d-flex align-items-center gap-10"
+                  >
                     <img
                       src="images/wishlist.svg"
                       className="nav-icon"
@@ -70,7 +78,10 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link className="d-flex align-items-center gap-10">
+                  <Link
+                    to="/login"
+                    className="d-flex align-items-center gap-10"
+                  >
                     <img src="images/user.svg" className="nav-icon" alt="" />
                     <p>
                       Log in <br /> My Account
@@ -78,7 +89,10 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link className="d-flex align-items-center position-relative">
+                  <Link
+                    to="/cart"
+                    className="d-flex align-items-center position-relative"
+                  >
                     <img src="images/cart.svg" className="nav-icon" alt="" />
                     <div>
                       <span className="card-count position-absolute">0</span>

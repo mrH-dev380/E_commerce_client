@@ -5,6 +5,9 @@ const routes = {
   ourStore: '/product',
   blogs: '/blogs',
   compareProduct: '/compare-product',
+  wishlist: '/wishlist',
+  cart: '/cart',
+  login: '/login',
 }
 
 export default routes
