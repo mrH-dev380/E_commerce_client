@@ -30,6 +30,12 @@ a {
   text-decoration: none;
   display: inline-block;
   color: white;
+  /* transition: 0.2s; */
+}
+
+a:hover {
+  /* opacity: 0.6; */
+  color: white;
 }
 
 .gap-10 {

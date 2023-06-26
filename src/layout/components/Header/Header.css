@@ -3,12 +3,6 @@
   border-bottom: 1px solid var(--black-border);
 }
 
-/* .col-6,
-.col-2,
-.col-5 {
-  align-self: center;
-} */
-
 .row {
   display: flex;
   align-items: center;

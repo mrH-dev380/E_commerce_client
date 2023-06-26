@@ -1,0 +1,52 @@
+.auth-card {
+  padding: 20px;
+  background-color: white;
+  width: 500px;
+  margin: 30px auto;
+  border-radius: 10px;
+}
+
+.auth-card input {
+  margin: 20px 0;
+}
+
+.auth-card h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--grey-text);
+}
+
+.auth-card p {
+  font-size: 13px;
+  color: var(--grey-text);
+}
+
+.auth-card .form-control {
+  height: 50px;
+  background-color: var(--grey-background);
+  color: var(--grey-text);
+  font-size: 14px;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+.auth-card a {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-black);
+}
+
+.signup {
+  background-color: var(--text-hover) !important;
+  color: var(--black-color);
+  border: none;
+}
+
+.signup:hover {
+  background-color: var(--categories-background) !important;
+  color: white !important;
+}
+
+.forgot-password:hover {
+  color: var(--text-black);
+}

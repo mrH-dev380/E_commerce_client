@@ -1,12 +1,23 @@
+.wishlist-card {
+  padding: 20px 15px;
+  background-color: white;
+  border-radius: 10px;
+}
+
 .wishlist-card h5.title {
   font-size: 15px;
   line-height: 22px;
   font-weight: 500;
   color: var(--text-black);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .wishlist-card h6.price {
   font-size: 15px;
   line-height: 22px;
   font-weight: 400;
+  margin-bottom: 0px;
 }
