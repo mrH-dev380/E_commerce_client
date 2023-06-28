@@ -3,9 +3,9 @@ const routes = {
   about: '/about',
   contact: '/contact',
   ourStore: '/product',
-  singleProduct: '/product:id',
+  singleProduct: '/product/:id',
   blogs: '/blogs',
-  singleBlog: '/blog:id',
+  singleBlog: '/blog/:id',
   compareProduct: '/compare-product',
   wishlist: '/wishlist',
   cart: '/cart',
@@ -13,6 +13,10 @@ const routes = {
   signup: '/signup',
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
+  privacyPolicy: '/privacy-policy',
+  refundPolicy: '/refund-policy',
+  shippingPolicy: '/shipping-policy',
+  termAndConditions: '/term-conditions',
 }
 
 export default routes

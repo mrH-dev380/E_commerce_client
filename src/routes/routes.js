@@ -15,6 +15,10 @@ import Login from '~/pages/Login'
 import SignUp from '~/pages/SignUp'
 import ForgotPassword from '~/pages/ForgotPassword'
 import ResetPassword from '~/pages/ResetPassword'
+import PrivacyPolicy from '~/pages/PrivacyPolicy'
+import RefundPolicy from '~/pages/RefundPolicy'
+import ShippingPolicy from '~/pages/ShippingPolicy'
+import TermAndConditions from '~/pages/TermAndConditions'
 
 // Public routes
 const publicRoutes = [
@@ -32,6 +36,10 @@ const publicRoutes = [
   { path: config.routes.signup, component: SignUp },
   { path: config.routes.forgotPassword, component: ForgotPassword },
   { path: config.routes.resetPassword, component: ResetPassword },
+  { path: config.routes.privacyPolicy, component: PrivacyPolicy },
+  { path: config.routes.refundPolicy, component: RefundPolicy },
+  { path: config.routes.shippingPolicy, component: ShippingPolicy },
+  { path: config.routes.termAndConditions, component: TermAndConditions },
 ]
 
 const privateRoutes = []

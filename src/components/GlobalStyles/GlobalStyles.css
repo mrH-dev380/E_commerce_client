@@ -86,3 +86,8 @@ a:hover {
   padding: 3px;
   cursor: pointer;
 }
+
+.policy {
+  background-color: white;
+  padding: 30px;
+}

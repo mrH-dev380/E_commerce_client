@@ -10,30 +10,30 @@ const ProductCard = (props) => {
     <>
       <div
         className={` ${
-          location.pathname == '/product' ? `gr-${grid}` : 'col-3'
+          location.pathname === '/product' ? `gr-${grid}` : 'col-3'
         } `}
       >
-        <Link className="product-card position-relative">
+        <Link to="/product/:id" className="product-card position-relative">
           <div className="wishlist-icon position-absolute">
             <button className="border-0 bg-transparent">
-              <img src="images/wish.svg" alt="wishlist" />
+              <img src="../images/wish.svg" alt="wishlist" />
             </button>
           </div>
           <div className="action-bar position-absolute">
             <div className="d-flex flex-column gap-15">
               <button className="border-0 bg-transparent">
-                <img src="images/prodcompare.svg" alt="compare" />
+                <img src="../images/prodcompare.svg" alt="compare" />
               </button>
               <button className="border-0 bg-transparent">
-                <img src="images/view.svg" alt="view" />
+                <img src="../images/view.svg" alt="view" />
               </button>
               <button className="border-0 bg-transparent">
-                <img src="images/add-cart.svg" alt="addcart" />
+                <img src="../images/add-cart.svg" alt="addcart" />
               </button>
             </div>
           </div>
           <div className="product-image">
-            <img src="images/tab.jpg" alt="" />
+            <img src="../images/tab.jpg" alt="" />
             {/* <img src="images/tab1.jpg" alt="" /> */}
           </div>
           <div className="product-details">

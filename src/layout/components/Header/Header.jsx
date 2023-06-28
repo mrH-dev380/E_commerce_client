@@ -56,7 +56,11 @@ const Header = () => {
                     to="/compare-product"
                     className="d-flex align-items-center gap-10"
                   >
-                    <img src="images/compare.svg" className="nav-icon" alt="" />
+                    <img
+                      src="../images/compare.svg"
+                      className="nav-icon"
+                      alt=""
+                    />
                     <p>
                       Compare <br /> Products
                     </p>
@@ -68,7 +72,7 @@ const Header = () => {
                     className="d-flex align-items-center gap-10"
                   >
                     <img
-                      src="images/wishlist.svg"
+                      src="../images/wishlist.svg"
                       className="nav-icon"
                       alt=""
                     />
@@ -82,7 +86,7 @@ const Header = () => {
                     to="/login"
                     className="d-flex align-items-center gap-10"
                   >
-                    <img src="images/user.svg" className="nav-icon" alt="" />
+                    <img src="../images/user.svg" className="nav-icon" alt="" />
                     <p>
                       Log in <br /> My Account
                     </p>
@@ -93,7 +97,7 @@ const Header = () => {
                     to="/cart"
                     className="d-flex align-items-center position-relative"
                   >
-                    <img src="images/cart.svg" className="nav-icon" alt="" />
+                    <img src="../images/cart.svg" className="nav-icon" alt="" />
                     <div>
                       <span className="card-count position-absolute">0</span>
                     </div>
@@ -118,7 +122,7 @@ const Header = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <img src="images/menu.svg" alt="" />
+                      <img src="../images/menu.svg" alt="" />
                       <span className="d-inline-block  me-5">
                         Shop Categories
                       </span>

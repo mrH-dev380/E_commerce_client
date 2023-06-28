@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom'
 import Marquee from 'react-fast-marquee'
 import './Home.css'
 import Meta from '~/components/Meta'
-import BlogCard from '../../components/BlogCard/BlogCard'
-import ProductCard from '../../components/ProductCard/ProductCard'
-import SpecialProduct from '../../components/SpecialProduct/SpecialProduct'
+import BlogCard from '~/components/BlogCard'
+import ProductCard from '~/components/ProductCard'
+import SpecialProduct from '~/components/SpecialProduct'
+import PopularProduct from '~/components/PopularProduct'
 
 const Home = () => {
   return (
@@ -314,21 +315,7 @@ const Home = () => {
         </div>
       </section>
       {/* Product Card */}
-      <section className="product-wrapper home-wrapper-2 py-5">
-        <div className="container-xl">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="section-heading">Our Popular Products</h3>
-            </div>
-          </div>
-          <div className="row">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </div>
-        </div>
-      </section>
+      <PopularProduct />
       {/* Slider */}
       <section className="marque-wrapper home-wrapper-2 py-5">
         <div className="container-xl">

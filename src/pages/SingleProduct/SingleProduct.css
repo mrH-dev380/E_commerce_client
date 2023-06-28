@@ -1,0 +1,79 @@
+p {
+  text-align: left;
+}
+/* Product detail */
+.main-product-image {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.main-product-image > div {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.main-product-image img {
+  width: 100% !important;
+  height: 500px !important;
+  object-fit: cover;
+}
+/* Description */
+.description-wrapper h4,
+.reviews-wrapper h3 {
+  font-size: 26px;
+  color: var(--text-black);
+  margin-bottom: 10px;
+}
+
+.description-wrapper p {
+  font-size: 14px;
+  color: var(--grey-text);
+}
+
+/* Review */
+.review-inner-wrapper {
+  background-color: white;
+  padding: 30px;
+}
+
+.review-head {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
+}
+
+.review-head h4 {
+  font-size: 18px;
+  color: var(--text-black);
+}
+
+.review-head p,
+.review-head a {
+  font-size: 14px;
+  color: var(--grey-text);
+}
+
+.review-form h4 {
+  font-size: 16px;
+  color: var(--grey-text);
+}
+
+.review-form {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.review-form textarea {
+  font-size: 14px;
+}
+
+.review:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.review h6 {
+  font-size: 16px;
+}
+
+.review p {
+  font-size: 14px;
+  color: var(--grey-text);
+}

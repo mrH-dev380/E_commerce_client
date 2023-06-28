@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="row align-items-center">
             <div className="col-4">
               <div className="footer-top d-flex gap-30 align-items-center">
-                <img src="images/newsletter.png" alt="newsletter" />
+                <img src="../images/newsletter.png" alt="newsletter" />
                 <h2 className="mb-0 text-white">Sign Up for Newsletter</h2>
               </div>
             </div>
@@ -85,15 +85,21 @@ const Footer = () => {
                 <Link to="/term-conditions" className="text-white py-2 mb-1">
                   Terms & Conditions
                 </Link>
-                <Link className="text-white py-2 mb-1">Blogs</Link>
+                <Link to="/blogs" className="text-white py-2 mb-1">
+                  Blogs
+                </Link>
               </div>
             </div>
             <div className="col-3">
               <h4 className="text-white mb-4">Account</h4>
               <div className="footer-link d-flex flex-column">
-                <Link className="text-white py-2 mb-1">About Us</Link>
+                <Link to="/about" className="text-white py-2 mb-1">
+                  About Us
+                </Link>
                 <Link className="text-white py-2 mb-1">Faq</Link>
-                <Link className="text-white py-2 mb-1">Contact</Link>
+                <Link to="/contact" className="text-white py-2 mb-1">
+                  Contact
+                </Link>
               </div>
             </div>
             <div className="col-2">
