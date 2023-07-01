@@ -64,6 +64,20 @@ a:hover {
   color: var(--background-color);
 }
 
+.button-vice {
+  background-color: var(--text-hover);
+  color: var(--background-color);
+  font-size: 14px;
+  padding: 13px 33px;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+.button-vice:hover {
+  background-color: var(--categories-background);
+  color: white;
+}
+
 .container-xl {
   width: 1200px;
 }
