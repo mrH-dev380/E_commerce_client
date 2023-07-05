@@ -10,7 +10,6 @@
   --grey-text: #777777;
   --split-color: #ededed;
   --text-black: #1c1c1b;
-  --test: #e6432f;
 }
 
 * {
@@ -105,3 +104,4 @@ a:hover {
   background-color: white;
   padding: 30px;
 }
+

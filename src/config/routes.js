@@ -9,6 +9,7 @@ const routes = {
   compareProduct: '/compare-product',
   wishlist: '/wishlist',
   cart: '/cart',
+  checkOut: '/check-out',
   login: '/login',
   signup: '/signup',
   forgotPassword: '/forgot-password',

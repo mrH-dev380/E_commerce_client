@@ -11,6 +11,7 @@ import SingleBlog from '~/pages/SingleBlog'
 import CompareProduct from '~/pages/CompareProduct'
 import Wishlist from '~/pages/Wishlist'
 import Cart from '~/pages/Cart'
+import CheckOut from '~/pages/CheckOut'
 import Login from '~/pages/Login'
 import SignUp from '~/pages/SignUp'
 import ForgotPassword from '~/pages/ForgotPassword'
@@ -32,6 +33,7 @@ const publicRoutes = [
   { path: config.routes.compareProduct, component: CompareProduct },
   { path: config.routes.wishlist, component: Wishlist },
   { path: config.routes.cart, component: Cart },
+  { path: config.routes.checkOut, component: CheckOut },
   { path: config.routes.login, component: Login },
   { path: config.routes.signup, component: SignUp },
   { path: config.routes.forgotPassword, component: ForgotPassword },

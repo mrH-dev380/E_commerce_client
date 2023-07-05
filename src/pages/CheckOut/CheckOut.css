@@ -1,0 +1,209 @@
+.checkout-wrapper .row {
+  align-items: unset;
+}
+
+.shipping-address-wrapper,
+.package,
+.payment-wrapper {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.shipping-address-header,
+.package-header {
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+.shipping-address-header p {
+  color: var(--text-black);
+  font-size: 15px;
+}
+
+.shipping-address-header label {
+  color: var(--highlight-color);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.shipping-address-contain {
+  padding: 10px;
+}
+
+.shipping-address-contain p {
+  font-size: 15px;
+}
+
+.shipping-address-contain p:first-child {
+  padding-right: 20px;
+}
+
+/* modal address */
+.nav-address-input {
+  display: none;
+}
+
+.nav-address-input:checked ~ .nav-address__overlay {
+  display: block;
+}
+
+.nav-address__overlay {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  animation: fadeIn linear 0.2s;
+  display: none;
+}
+
+.nav-address-info {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 500px;
+  max-width: 100%;
+  background-color: white;
+  transform: translateX(100%);
+  transition: 0.2s;
+  animation: fadeIn linear 0.2s;
+}
+
+.nav-address-input:checked ~ .nav-address-info {
+  transform: translateX(0%);
+}
+
+.nav-address-info {
+  padding: 30px;
+}
+
+.nav-address-info p {
+  font-size: 18px;
+}
+
+.nav-address-info a {
+  font-size: 15px;
+  color: var(--highlight-color);
+}
+
+.nav-address-info a:hover {
+  color: var(--highlight-color);
+}
+
+.address-info-content {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--grey-text);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.shipping-address-info {
+  margin-left: 10px;
+}
+
+.shipping-address-info p {
+  font-size: 15px;
+}
+
+.shipping-address-info p:first-child {
+  margin-right: 10px;
+}
+
+.shipping-address-info span {
+  font-size: 12px;
+  color: var(--grey-text);
+}
+/* end modal */
+.package-header p {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.package-product {
+  padding: 12px;
+}
+
+/* Proceed to payment */
+.payment-wrapper .button-vice {
+  border: none;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.payment-wrapper .button-vice:hover {
+  background-color: var(--text-hover);
+  color: var(--background-color);
+}
+
+.payment-wrapper {
+  padding: 10px;
+}
+
+.payment-wrapper p {
+  font-size: 18px;
+}
+
+.payment-method {
+  border-radius: 8px;
+  position: relative;
+  border: 1px solid var(--grey-text);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.payment-method__cash {
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+.cash-icon {
+  font-size: 22px;
+  padding-right: 10px;
+}
+
+.payment-method-detail {
+  font-size: 14px !important;
+}
+
+.payment-method span {
+  display: block;
+  color: var(--grey-text);
+  padding: 5px 10px;
+}
+
+.payment-select-icon {
+  font-size: 22px;
+  position: absolute;
+  top: 5px;
+  right: 12px;
+}
+
+.method-no-check {
+  font-size: 18px;
+}
+
+.method-select {
+  border: 1px solid var(--highlight-color);
+}
+
+.method-check {
+  color: var(--highlight-color);
+  font-size: 22px;
+}
+
+.payment-option {
+  padding: 5px 10px;
+}
+
+.card-icon {
+  font-size: 16px;
+}
+
+.invoice-detail p {
+  font-size: 14px;
+}

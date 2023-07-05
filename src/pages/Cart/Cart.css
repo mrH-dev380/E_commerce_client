@@ -1,0 +1,102 @@
+.cart-wrapper .row {
+  align-items: unset !important;
+  justify-content: space-between;
+}
+
+.cart-nav {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.checkout-product-wrapper {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--grey-text);
+  text-transform: uppercase;
+}
+
+.qty-price {
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  color: var(--grey-text);
+  text-transform: uppercase;
+  justify-content: center;
+}
+
+/* invoice */
+.invoice {
+  background-color: white;
+  border-radius: 4px;
+  padding: 20px;
+  width: 32%;
+}
+
+.invoice h3 {
+  font-size: 24px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--split-color);
+}
+
+.invoice-detail p {
+  font-size: 14px;
+  color: var(--grey-text);
+}
+
+.invoice-detail span {
+  font-size: 16px;
+  color: var(--black-text);
+  font-weight: 500;
+}
+
+.coupon-apply {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--split-color);
+}
+
+.coupon-apply input {
+  outline: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--grey-text);
+  padding: 0;
+  font-size: 14px;
+}
+
+.coupon-apply button {
+  width: 120px;
+  height: 32px;
+  cursor: pointer;
+  background-color: var(--text-hover);
+  border: none;
+  border-radius: 4px;
+  color: var(--categories-background);
+}
+
+.subtotal span {
+  font-size: 20px;
+  color: var(--text-black);
+  font-weight: 500;
+}
+
+.invoice a {
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+/* Product info */
+
+.product-info:not(:last-child) {
+  border-bottom: 1px solid var(--split-color);
+}
+
+.cart-product-image {
+  width: 80px;
+}
