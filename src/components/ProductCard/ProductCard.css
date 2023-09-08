@@ -112,3 +112,7 @@
 .gr-12 .action-bar {
   top: 17%;
 }
+
+.modal-content {
+  z-index: 1050;
+}

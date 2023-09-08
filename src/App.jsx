@@ -1,8 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './Layout'
 import { publicRoutes } from '~/routes'
 
 function App() {
+  const getUserFromLocalStorage = localStorage.getItem('token')
+  // ? JSON.parse(localStorage.getItem('token'))
+  // : null
+
+  const user = !!getUserFromLocalStorage
   return (
     <>
       <BrowserRouter>
@@ -18,6 +23,14 @@ function App() {
                     index
                     path={route.path}
                     element={<Page />}
+                  />
+                )
+              } else if (route.path === '/check-out') {
+                return (
+                  <Route
+                    key={index}
+                    path={route.path}
+                    element={user ? <Page /> : <Navigate to="/login" />}
                   />
                 )
               } else {

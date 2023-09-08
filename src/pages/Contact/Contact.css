@@ -28,3 +28,11 @@
   color: var(--grey-text);
   font-size: 14px;
 }
+
+.contact-form .form-floating label {
+  top: 0px;
+}
+
+.contact-form .error {
+  top:0px
+}

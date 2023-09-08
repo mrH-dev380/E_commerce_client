@@ -11,3 +11,8 @@
   font-weight: 600;
   color: var(--text-black);
 }
+
+.img-fluid {
+  display: flex;
+  justify-content: center;
+}

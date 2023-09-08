@@ -7,12 +7,26 @@
 .payment-wrapper {
   background-color: white;
   border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
 }
 
 .shipping-address-header,
 .package-header {
   background-color: #fafafa;
-  padding: 10px;
+  height: 40px;
+  align-items: center;
+  padding-inline: 10px;
+}
+
+.package-header {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.package-style {
+  background-color: #fafafa;
 }
 
 .shipping-address-header p {
@@ -39,11 +53,12 @@
 }
 
 /* modal address */
-.nav-address-input {
+.nav-address-edit,
+.add-address-input {
   display: none;
 }
 
-.nav-address-input:checked ~ .nav-address__overlay {
+.nav-address-edit:checked ~ .nav-address__overlay {
   display: block;
 }
 
@@ -59,7 +74,12 @@
   display: none;
 }
 
-.nav-address-info {
+.nav-address-edit:checked ~ .nav-address-info {
+  transform: translateX(0%);
+}
+
+.nav-address-info,
+.add-address-form {
   position: fixed;
   z-index: 10;
   top: 0;
@@ -73,7 +93,11 @@
   animation: fadeIn linear 0.2s;
 }
 
-.nav-address-input:checked ~ .nav-address-info {
+.add-address-form {
+  z-index: 12;
+}
+
+.add-address-input:checked ~ .add-address-form {
   transform: translateX(0%);
 }
 
@@ -85,13 +109,10 @@
   font-size: 18px;
 }
 
-.nav-address-info a {
+.nav-address-info .add-new-address {
   font-size: 15px;
   color: var(--highlight-color);
-}
-
-.nav-address-info a:hover {
-  color: var(--highlight-color);
+  cursor: pointer;
 }
 
 .address-info-content {
@@ -206,4 +227,49 @@
 
 .invoice-detail p {
   font-size: 14px;
+}
+
+.coupon-apply {
+  position: relative;
+}
+
+.coupon-apply span {
+  color: red;
+  position: absolute;
+  top: 34px;
+}
+/* Form add new address */
+.add-address-form {
+  padding: 30px;
+}
+
+.add-address-form .form-control {
+  height: 50px;
+  background-color: var(--grey-background);
+  font-size: 14px;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+.new-address-info .name-input .error {
+  padding-top: 8px;
+}
+
+.select-address {
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  padding: 8px;
+  background-color: var(--grey-background);
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+.select-address:focus-visible {
+  border: 0px solid transparent;
+}
+
+.new-address-info .button-vice {
+  border: none;
+  border-radius: 4px;
 }

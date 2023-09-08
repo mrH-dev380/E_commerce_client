@@ -1,8 +1,55 @@
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 import { BsSearch } from 'react-icons/bs'
-// import 'bootstrap/dist/js/bootstrap.min.js'
+import { toast } from 'react-toastify'
+
 import './Header.css'
+import { getCart, getWishlist, logOut } from '../../../features/user/userSlice'
+import { getAllCategory } from '~/features/productCategory/productCategorySlice'
 const Header = () => {
+  const getUserFromLocalStorage = localStorage.getItem('token')
+    ? JSON.parse(localStorage.getItem('token'))
+    : null
+  const user = !!getUserFromLocalStorage
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const auth = useSelector((state) => state.auth.user)
+  const category = useSelector((state) => state.productCategory.categories)
+
+  useEffect(() => {
+    if (user === true && auth) {
+      dispatch(getCart())
+      dispatch(getWishlist())
+    }
+    if (category.length === 0) dispatch(getAllCategory())
+  }, [user])
+
+  const productCategories = useSelector(
+    (state) => state.productCategory.categories
+  )
+  const cartData = useSelector((state) => state.auth.cart)
+
+  const userCart = () => {
+    if (user === false) {
+      toast.error('Please login and try again')
+    } else if (user) {
+      navigate('/cart')
+    }
+  }
+
+  const handleLogOut = async () => {
+    if (user) {
+      await localStorage.removeItem('token')
+      await localStorage.removeItem('user')
+      await dispatch(logOut())
+      toast.info('Log Out Successfully!')
+      navigate('/')
+      window.location.reload(true)
+    }
+  }
   return (
     <>
       <header className="header-top-strip py-2">
@@ -82,26 +129,83 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link
-                    to="/login"
-                    className="d-flex align-items-center gap-10"
-                  >
-                    <img src="../images/user.svg" className="nav-icon" alt="" />
-                    <p>
-                      Log in <br /> My Account
-                    </p>
-                  </Link>
+                  {user ? (
+                    <div className="dropdown">
+                      <button
+                        className="d-flex align-items-center gap-10 bg-transparent user-icon"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <img
+                          src="../images/user.svg"
+                          className="nav-icon"
+                          alt=""
+                        />
+                        <p>My Account</p>
+                      </button>
+                      <ul
+                        className="dropdown-menu dropdown-menu__user"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <li>
+                          <Link
+                            to="/information"
+                            className="dropdown-item text-white"
+                          >
+                            Information
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/orders"
+                            className="dropdown-item text-white"
+                          >
+                            My Order
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="dropdown-item text-white"
+                            onClick={handleLogOut}
+                          >
+                            Log Out
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="d-flex align-items-center gap-10"
+                    >
+                      <img
+                        src="../images/user.svg"
+                        className="nav-icon"
+                        alt=""
+                      />
+                      <p>
+                        Login <br /> Sign Up
+                      </p>
+                    </Link>
+                  )}
                 </div>
                 <div>
-                  <Link
-                    to="/cart"
-                    className="d-flex align-items-center position-relative"
+                  <div
+                    // to="/cart"
+                    className="d-flex align-items-center position-relative cart-button"
+                    onClick={() => userCart()}
                   >
                     <img src="../images/cart.svg" className="nav-icon" alt="" />
                     <div>
-                      <span className="card-count position-absolute">0</span>
+                      <span className="card-count position-absolute">
+                        {cartData.length > 0
+                          ? cartData[0]?.products?.length
+                          : 0}
+                      </span>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -131,21 +235,15 @@ const Header = () => {
                       className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
-                      <li>
-                        <Link className="dropdown-item text-white" to="#">
-                          Action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="#">
-                          Another action
-                        </Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="#">
-                          Something else here
-                        </Link>
-                      </li>
+                      {productCategories.map((category) => {
+                        return (
+                          <li key={category.id}>
+                            <Link className="dropdown-item text-white" to="#">
+                              {category.title}
+                            </Link>
+                          </li>
+                        )
+                      })}
                     </ul>
                   </div>
                 </div>

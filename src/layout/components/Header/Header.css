@@ -82,7 +82,7 @@ p {
 .dropdown-menu {
   background-color: var(--black-color);
   width: 100%;
-  transform: translate(0, 45px) !important;
+  transform: translate(0, 6px) !important;
 }
 
 .dropdown-item {
@@ -97,4 +97,53 @@ li + li {
 .dropdown-item:hover {
   background-color: transparent;
   color: var(--text-hover) !important;
+}
+
+.user-icon {
+  border: none;
+}
+
+.user-icon > p {
+  font-size: 12px;
+  text-transform: none;
+}
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+.dropdown > .dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+.dropdown > .user-icon:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+
+.cart-button {
+  cursor: pointer;
+}
+
+/* .dropdown-menu {
+  display: block;
+} */
+
+#dropdownMenuButton1::before {
+  content: ' ';
+  position: absolute;
+  top: 32px;
+  width: 238px;
+  height: 20px;
+}
+
+#dropdownMenuButton::before {
+  content: ' ';
+  position: absolute;
+  top: 30px;
+  width: 119px;
+  height: 20px;
+}
+
+.dropdown-menu__user {
+  transform: translate(0, 14px) !important;
 }

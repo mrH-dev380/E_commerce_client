@@ -1,11 +1,30 @@
-import ReactStars from 'react-rating-stars-component'
-import Container from '~/components/Container'
 import './OurStore.css'
 import ProductCard from '~/components/ProductCard'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import Container from '~/components/Container'
+import { getAllProduct } from '~/features/product/productSlice'
+import { getAllCategory } from '../../features/productCategory/productCategorySlice'
+import { deletePreOrder } from '../../features/user/userSlice'
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4)
+  const dispatch = useDispatch()
+  const product = useSelector((state) => state.product.products)
+  const category = useSelector((state) => state.productCategory.categories)
+
+  useEffect(() => {
+    if (product.length === 0) dispatch(getAllProduct())
+    if (category.length === 0) dispatch(getAllCategory())
+    dispatch(deletePreOrder())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const productCategories = useSelector(
+    (state) => state.productCategory.categories
+  )
+
   return (
     <>
       <Container title="Our Store" className="store-wrapper">
@@ -15,10 +34,9 @@ const OurStore = () => {
             <h3 className="filter-title">Shop By Categories</h3>
             <div>
               <ul className="ps-0 mb-0">
-                <li>Watch</li>
-                <li>Tv</li>
-                <li>Camera</li>
-                <li>Laptop</li>
+                {productCategories.map((category, index) => {
+                  return <li key={index}>{category.title}</li>
+                })}
               </ul>
             </div>
           </div>
@@ -53,7 +71,7 @@ const OurStore = () => {
               </div>
               {/* Price */}
               <h5 className="sub-title">Price</h5>
-              <div className="d-flex align-items-center gap-10">
+              <div className="range-price d-flex align-items-center gap-10">
                 <div className="form-floating">
                   <input
                     type="email"
@@ -71,94 +89,6 @@ const OurStore = () => {
                     placeholder="To"
                   />
                   <label htmlFor="floatingInput1">To</label>
-                </div>
-              </div>
-              {/* Size */}
-              <h5 className="sub-title">Size</h5>
-              <div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="color-1"
-                  />
-                  <label className="form-check-label ms-3" htmlFor="color-1">
-                    S (2)
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="color-2"
-                  />
-                  <label className="form-check-label ms-3" htmlFor="color-2">
-                    M (2)
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Product Tags */}
-          <div className="filter-card mb-3">
-            <h3 className="filter-title">Product Tags</h3>
-            <div>
-              <div className="product-tags d-flex flex-wrap align-items-center gap-10">
-                <span className="badge rounded-2 py-2 px-3">Headphone</span>
-                <span className="badge rounded-2 py-2 px-3">Laptop</span>
-                <span className="badge rounded-2 py-2 px-3">Mobile</span>
-                <span className="badge rounded-2 py-2 px-3">Wire</span>
-              </div>
-            </div>
-          </div>
-          {/* Random Products */}
-          <div className="filter-card mb-3">
-            <h3 className="filter-title">Random Product</h3>
-            <div>
-              <div className="random-products py-3 d-flex">
-                <div className="w-40">
-                  <img
-                    src="images/watch.jpg"
-                    className="img-fluid"
-                    alt="watch"
-                  />
-                </div>
-                <div className="w-60 ms-3">
-                  <h5>
-                    Kids headphones bulk 10 pack multi colored for students
-                  </h5>
-                  <ReactStars
-                    count={5}
-                    size={20}
-                    value={4}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
-                  <b>$ 300</b>
-                </div>
-              </div>
-              <div className="random-products py-3 d-flex">
-                <div className="w-40">
-                  <img
-                    src="images/watch.jpg"
-                    className="img-fluid"
-                    alt="watch"
-                  />
-                </div>
-                <div className="w-60 ms-3">
-                  <h5>
-                    Kids headphones bulk 10 pack multi colored for students
-                  </h5>
-                  <ReactStars
-                    count={5}
-                    size={20}
-                    value={4}
-                    edit={false}
-                    activeColor="#ffd700"
-                  />
-                  <b>$ 300</b>
                 </div>
               </div>
             </div>
@@ -233,12 +163,7 @@ const OurStore = () => {
           </div>
           <div className="products-list pb-5">
             <div className="d-flex gap-10 flex-wrap">
-              <ProductCard grid={grid} />
-              <ProductCard grid={grid} />
-              <ProductCard grid={grid} />
-              <ProductCard grid={grid} />
-              <ProductCard grid={grid} />
-              <ProductCard grid={grid} />
+              <ProductCard grid={grid} data={product} />
             </div>
           </div>
         </div>

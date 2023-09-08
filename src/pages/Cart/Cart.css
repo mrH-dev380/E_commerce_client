@@ -79,6 +79,10 @@
   color: var(--categories-background);
 }
 
+.subtotal {
+  border-top: 1px solid var(--split-color);
+}
+
 .subtotal span {
   font-size: 20px;
   color: var(--text-black);
@@ -98,5 +102,7 @@
 }
 
 .cart-product-image {
-  width: 80px;
+  width: 90px;
+  padding-inline: 8px;
+  object-fit: contain;
 }

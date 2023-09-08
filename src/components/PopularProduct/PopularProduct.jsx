@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import ProductCard from '../ProductCard/ProductCard'
 
-const PopularProduct = () => {
+const PopularProduct = (props) => {
+  const { data } = props
   return (
     <>
       <section className="product-wrapper home-wrapper-2 py-5">
@@ -11,10 +13,7 @@ const PopularProduct = () => {
             </div>
           </div>
           <div className="row">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard data={data} />
           </div>
         </div>
       </section>

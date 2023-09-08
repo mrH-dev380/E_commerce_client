@@ -1,9 +1,21 @@
-import './Blog.css'
-import BlogCard from '~/components/BlogCard'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import './Blog.css'
+import noResult from '../../assets/images/no-result-found.png'
+import BlogCard from '~/components/BlogCard'
 import Container from '~/components/Container'
+import { getAllBlog } from '~/features/blog/blogSlice'
 
 const Blog = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (blogState.length === 0) dispatch(getAllBlog())
+  }, [])
+
+  const blogState = useSelector((state) => state.blog.blogs)
+
   return (
     <>
       <Container title="Blogs" className="blog-wrapper">
@@ -22,17 +34,13 @@ const Blog = () => {
         </div>
         <div className="col-9">
           <div className="row">
-            <div className="col-6 mb-3">
-              <BlogCard />
-            </div>
-            <div className="col-6 mb-3">
-              <BlogCard />
-            </div>
-            <div className="col-6 mb-3">
-              <BlogCard />
-            </div>
-            <div className="col-6 mb-3">
-              <BlogCard />
+            {blogState.length === 0 && (
+              <div className="no-result-found">
+                <img src={noResult} alt="" />
+              </div>
+            )}
+            <div className="mb-3">
+              <BlogCard data={blogState} />
             </div>
           </div>
         </div>

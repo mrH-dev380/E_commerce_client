@@ -105,3 +105,45 @@ a:hover {
   padding: 30px;
 }
 
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+  font-size: 12px;
+}
+
+.form-floating > .form-control:focus ~ label {
+  font-size: 12px;
+}
+
+.form-floating > .form-select ~ label {
+  font-size: 12px;
+}
+
+.form-floating {
+  width: 100%;
+}
+
+.form-floating > label {
+  top: 14px;
+  font-size: 14px;
+  color: var(--grey-text);
+}
+.name-input > .form-floating > label {
+  top: 2px;
+  font-size: 14px;
+  color: var(--grey-text);
+}
+
+.name-input {
+  width: 100%;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  top: -6px;
+  position: relative;
+  padding-left: 6px;
+}
+
+.Toastify__toast-container--top-right {
+  top: 100px;
+}

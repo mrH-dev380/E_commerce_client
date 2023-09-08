@@ -3,17 +3,78 @@ import { useState, useEffect } from 'react'
 import ReactStars from 'react-rating-stars-component'
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 import { CiHeart, CiRepeat } from 'react-icons/ci'
+import { BiMinus, BiPlus } from 'react-icons/bi'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import './SingleProduct.css'
 import Container from '~/components/Container'
 import PopularProduct from '~/components/PopularProduct'
-import Color from '~/components/Color'
-import QuantitySelect from '../../components/QuantitySelect/QuantitySelect'
+import { getProductById } from '../../features/product/productSlice'
+import formatNumber from '../../utils/formatNumber'
+import noImage from '~/assets/images/noimage.png'
+import { addToWishlist, resetState } from '../../features/product/productSlice'
+import { getAllColor } from '../../features/color/colorSlice'
+import {
+  addToCart,
+  getCart,
+  deletePreOrder,
+  createPreOrder,
+  getPreOrder,
+} from '../../features/user/userSlice'
 
 const SingleProduct = () => {
   const [orderedProduct, setOrderedProduct] = useState(true)
 
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const getUserFromLocalStorage = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))
+    : null
+  const user = !!getUserFromLocalStorage
+
+  const [quantity, setQuantity] = useState(1)
+
+  const handlePlus = () => {
+    setQuantity(quantity + 1)
+  }
+
+  const handleMinus = () => {
+    if (quantity >= 2) setQuantity(quantity - 1)
+  }
+
+  const wishlistData = useSelector((state) => state.auth.userWishlist)
+  let wishlist = []
+  wishlistData && wishlistData.map((product) => wishlist.push(product._id))
+
+  const userCart = useSelector((state) => state.auth.cart)
+  let cartData = []
+  userCart &&
+    userCart[0]?.products?.map((product) =>
+      cartData.push({
+        _id: product.product._id,
+        color: product.color,
+        count: product.count,
+      })
+    )
+
+  const product = useSelector((state) => state.product.products)
+  let popularProduct = []
+  product?.map((item) => {
+    if (item.tags === 'popular') {
+      popularProduct.push(item)
+    }
+  })
+
+  const productId = location.pathname.split('/')[2]
+
   useEffect(() => {
+    if (productId !== undefined) {
+      dispatch(getProductById(productId))
+      dispatch(getAllColor())
+    }
     let zoom = document.querySelector('.zoom')
     let imgZoom = document.getElementById('imgZoom')
 
@@ -35,7 +96,45 @@ const SingleProduct = () => {
     zoom.addEventListener('mouseout', () => {
       imgZoom.style.opacity = 0
     })
+
+    return () => {
+      dispatch(resetState())
+    }
   }, [])
+
+  const {
+    productTitle,
+    productDescription,
+    productPrice,
+    productBrandName,
+    productCategoryName,
+    productColor,
+    productQuantity,
+    productSold,
+    productImages,
+    productTotalRating,
+  } = useSelector((state) => state.product)
+
+  const colorData = useSelector((state) => state.color.colors)
+  let colorList = []
+  productColor &&
+    colorData &&
+    colorData.map(
+      (color) =>
+        productColor.includes(color.title) &&
+        colorList.push({ code: color.code, title: color.title })
+    )
+
+  const [colorTitle, setColorTitle] = useState('')
+
+  const imageCheck = !!productImages
+
+  const [image, setImage] = useState(noImage)
+
+  useEffect(() => {
+    setImage(productImages ? productImages[0]?.url : noImage)
+    setColorTitle(productColor ? productColor[0] : '')
+  }, [productImages, productColor])
 
   const nextImageBtn = () => {
     const widthItem = document.querySelector('.other-image').offsetWidth
@@ -46,10 +145,76 @@ const SingleProduct = () => {
     document.querySelector('.list-product-image').scrollLeft -= widthItem
   }
 
+  const addProductCart = async () => {
+    const prodIdCart = []
+    cartData.map((product) => prodIdCart.push(product._id))
+    const findProdCart = prodIdCart.includes(productId)
+
+    if (!user) {
+      toast.error('Please login and try again')
+    } else if (findProdCart) {
+      let prodInCart = cartData.filter((product) => product._id === productId)
+      let filterColor = prodInCart.filter(
+        (product) => product.color === colorTitle
+      )
+      let filterProduct = cartData.filter(
+        (product) => product._id !== productId
+      )
+      if (filterColor.length > 0) {
+        prodInCart.map((prod) => {
+          if (prod.color === colorTitle) {
+            prod.count += 1
+          }
+        })
+        Array.prototype.push.apply(filterProduct, prodInCart)
+        await dispatch(addToCart({ cart: filterProduct }))
+        dispatch(getCart())
+        toast.success('Add to Cart Successfully!')
+      } else {
+        prodInCart.push({ color: colorTitle, count: quantity, _id: productId })
+        Array.prototype.push.apply(filterProduct, prodInCart)
+        await dispatch(addToCart({ cart: filterProduct }))
+        dispatch(getCart())
+        toast.success('Add to Cart Successfully!')
+      }
+    } else {
+      cartData.push({
+        color: colorTitle,
+        count: quantity,
+        _id: productId,
+      })
+      await dispatch(addToCart({ cart: cartData }))
+      dispatch(getCart())
+      toast.success('Add to Cart Successfully!')
+    }
+  }
+
+  const buyProductNow = async () => {
+    await dispatch(
+      createPreOrder({
+        cart: [{ _id: productId, color: colorTitle, count: quantity }],
+      })
+    )
+    await dispatch(getPreOrder())
+    navigate('/check-out')
+  }
+
+  const addWishlist = (productId) => {
+    const findProdWishlist = wishlist.includes(productId)
+    if (!user) {
+      toast.error('Please login and try again')
+    } else if (!findProdWishlist && user) {
+      dispatch(addToWishlist(productId))
+      toast.success('Add to Wishlist Successfully!')
+    } else {
+      toast.info('Product Already in Wishlist')
+    }
+  }
+
   return (
     <>
       <Container
-        title="Product name"
+        title={productTitle}
         back="product"
         className="main-product-wrapper"
       >
@@ -58,30 +223,32 @@ const SingleProduct = () => {
           {/* Product Image */}
           <div className="main-product-image">
             <div className="zoom">
-              <img src="../images/tab3.jpg" alt="" />
-              <img src="../images/tab3.jpg" alt="" id="imgZoom" />
+              {imageCheck ? (
+                <>
+                  <img src={image} alt="" id="mainImg" />
+                  <img src={image} alt="" id="imgZoom" />
+                </>
+              ) : (
+                <>
+                  <img src={noImage} alt="" />
+                  <img src={noImage} alt="" id="imgZoom" />
+                </>
+              )}
             </div>
             <div className="list-image-wrapper position-relative">
               <div className="list-product-image">
                 <div className="other-product-image d-flex justify-content-between">
-                  <div className="other-image">
-                    <img src="../images/tab.jpg" alt="" />
-                  </div>
-                  <div className="other-image">
-                    <img src="../images/tab1.jpg" alt="" />
-                  </div>
-                  <div className="other-image">
-                    <img src="../images/tab2.jpg" alt="" />
-                  </div>
-                  <div className="other-image">
-                    <img src="../images/tab3.jpg" alt="" />
-                  </div>
-                  <div className="other-image">
-                    <img src="../images/tab3.jpg" alt="" />
-                  </div>
-                  <div className="other-image">
-                    <img src="../images/tab3.jpg" alt="" />
-                  </div>
+                  {productImages?.map((prodImg, index) => {
+                    return (
+                      <div key={index} className="other-image">
+                        <img
+                          src={prodImg.url}
+                          alt=""
+                          onClick={() => setImage(prodImg.url)}
+                        />
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
               <div className="direction">
@@ -98,78 +265,95 @@ const SingleProduct = () => {
         <div className="col-7">
           {/* Product detail */}
           <div className="main-product-detail">
-            <h3>
-              Apple iPad (9th Generation): with A13 Bionic chip, 10.2-inch
-              Retina Display, 64GB, Wi-Fi, 12MP front/8MP Back Camera, Touch ID,
-              All-Day Battery Life – Silver
-            </h3>
+            <h3>{productTitle}</h3>
             <div className="rating-and-sold d-flex align-items-center">
-              <p className="rating-avg">4.8</p>
+              <p className="rating-avg">{productTotalRating}</p>
               <ReactStars
                 count={5}
                 size={24}
-                value={4}
+                value={parseInt(productTotalRating)}
                 edit={false}
                 activeColor="#ffd700"
               />
               <span className="rating-count d-flex">
-                479&nbsp;
+                {formatNumber(productTotalRating)}&nbsp;
                 <p className="rating-count__text">ratings</p>
               </span>
               <span className="sold d-flex">
-                1,7k&nbsp; <p className="sold__text">sold</p>
+                {formatNumber(productSold)}&nbsp;{' '}
+                <p className="sold__text">sold</p>
               </span>
             </div>
-            <h3 className="mt-4">$100.00</h3>
-            <div className="product-select">
-              <span className="d-flex mt-3">
-                Size: <p> &nbsp;S</p>
-              </span>
-              <div className="product-option d-flex mt-3">
-                <button className="product-size">S</button>
-                <button className="product-size">L</button>
-              </div>
-            </div>
+            <h3 className="mt-4">${productPrice}</h3>
             <div className="product-select mt-3">
               <span className="product-color d-flex mb-3">
-                Color: <p> &nbsp;Grey</p>
+                Color: <p> &nbsp;{colorTitle}</p>
               </span>
-              <Color />
+              <ul className="colors ps-0">
+                {colorList?.map((color, index) => (
+                  <li
+                    key={index}
+                    style={{ backgroundColor: color.code }}
+                    onClick={() => setColorTitle(color.title)}
+                  ></li>
+                ))}
+              </ul>
             </div>
             <table className="cover-product mt-4">
               <tr>
                 <th>Brand</th>
-                <th>Apple</th>
-              </tr>
-              <tr>
-                <th>Type</th>
-                <th>Ipad</th>
+                <th>{productBrandName}</th>
               </tr>
               <tr>
                 <th>Category</th>
-                <th>Smart Phone</th>
-                <th>Tablet</th>
+                <th>{productCategoryName}</th>
               </tr>
               <tr>
                 <th>Availability</th>
-                <th>904</th>
+                <th>{productQuantity}</th>
               </tr>
             </table>
             <div className="d-flex align-items-center gap-30 mt-3">
-              <div className="product-action">
-                <a href="" className="d-flex align-items-center">
+              <div
+                className="product-action"
+                onClick={() => addWishlist(productId)}
+              >
+                <div href="" className="d-flex align-items-center">
                   <CiHeart className="product-action-icon" />
                   Add to Wishlist
-                </a>
+                </div>
               </div>
               <div className="product-action">
-                <a href="" className="d-flex align-items-center">
+                <div href="" className="d-flex align-items-center">
                   <CiRepeat className="product-action-icon" />
                   Compare Product
-                </a>
+                </div>
               </div>
             </div>
-            <QuantitySelect />
+            <div className="product-quantity-select mt-3  ">
+              <p className="mb-3">Quantity</p>
+              <button
+                className={`quantity-action ${
+                  quantity === 1 ? 'quantity-action__disabled' : ''
+                }`}
+                onClick={handleMinus}
+              >
+                <BiMinus />
+              </button>
+              <span>{quantity}</span>
+              <button className="quantity-action" onClick={handlePlus}>
+                <BiPlus />
+              </button>
+              <button
+                className="button mx-5"
+                onClick={() => addProductCart(productId)}
+              >
+                Add to Cart
+              </button>
+              <button className="button-vice" onClick={buyProductNow}>
+                Buy It Now
+              </button>
+            </div>
           </div>
         </div>
       </Container>
@@ -179,14 +363,10 @@ const SingleProduct = () => {
           <div className="row">
             <div className="col-12">
               <h4>Description</h4>
-              <div className="bg-white p-3">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Tenetur nisi similique illum aut perferendis voluptas,
-                  quisquam obcaecati qui nobis officia. Voluptatibus in harum
-                  deleniti labore maxime officia esse eos? Repellat?
-                </p>
-              </div>
+              <div
+                className="bg-white p-3"
+                dangerouslySetInnerHTML={{ __html: productDescription }}
+              ></div>
             </div>
           </div>
         </div>
@@ -276,7 +456,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
-      <PopularProduct />
+      <PopularProduct data={popularProduct} />
     </>
   )
 }

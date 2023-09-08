@@ -1,6 +1,7 @@
 .product-info {
   background-color: white;
   border-radius: 4px;
+  width: 100%;
 }
 
 .product-title {
@@ -8,7 +9,10 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  line-height: 18px;
+  height: 36px;
   padding-right: 20px;
+  /* width: 524px; */
 }
 
 .qty-price {
@@ -46,4 +50,5 @@
 .remove-icon {
   color: var(--categories-background);
   font-size: 18px;
+  cursor: pointer;
 }

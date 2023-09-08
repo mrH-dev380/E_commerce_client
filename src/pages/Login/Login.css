@@ -7,7 +7,7 @@
 }
 
 .auth-card input {
-  margin: 20px 0;
+  margin: 12px 0;
 }
 
 .auth-card h3 {
@@ -24,7 +24,6 @@
 .auth-card .form-control {
   height: 50px;
   background-color: var(--grey-background);
-  color: var(--grey-text);
   font-size: 14px;
   border-radius: 10px;
   border-color: transparent;

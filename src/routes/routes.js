@@ -12,6 +12,7 @@ import CompareProduct from '~/pages/CompareProduct'
 import Wishlist from '~/pages/Wishlist'
 import Cart from '~/pages/Cart'
 import CheckOut from '~/pages/CheckOut'
+import Order from '~/pages/Order'
 import Login from '~/pages/Login'
 import SignUp from '~/pages/SignUp'
 import ForgotPassword from '~/pages/ForgotPassword'
@@ -20,6 +21,7 @@ import PrivacyPolicy from '~/pages/PrivacyPolicy'
 import RefundPolicy from '~/pages/RefundPolicy'
 import ShippingPolicy from '~/pages/ShippingPolicy'
 import TermAndConditions from '~/pages/TermAndConditions'
+import UserInfo from '~/pages/UserInfo'
 
 // Public routes
 const publicRoutes = [
@@ -34,6 +36,7 @@ const publicRoutes = [
   { path: config.routes.wishlist, component: Wishlist },
   { path: config.routes.cart, component: Cart },
   { path: config.routes.checkOut, component: CheckOut },
+  { path: config.routes.orders, component: Order },
   { path: config.routes.login, component: Login },
   { path: config.routes.signup, component: SignUp },
   { path: config.routes.forgotPassword, component: ForgotPassword },
@@ -42,6 +45,7 @@ const publicRoutes = [
   { path: config.routes.refundPolicy, component: RefundPolicy },
   { path: config.routes.shippingPolicy, component: ShippingPolicy },
   { path: config.routes.termAndConditions, component: TermAndConditions },
+  { path: config.routes.information, component: UserInfo },
 ]
 
 const privateRoutes = []

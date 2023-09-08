@@ -1,0 +1,22 @@
+.info-tag {
+  color: var(--grey-text);
+  font-size: 14px;
+  width: 20%;
+  text-align: right;
+  padding-right: 12px;
+}
+
+.info-fix {
+  color: var(--text-black);
+  font-size: 14px;
+  flex: 1;
+  padding-left: 4px;
+}
+
+.name-input .error {
+  top: 0;
+}
+
+.info-display .name-input {
+  width: 80%;
+}

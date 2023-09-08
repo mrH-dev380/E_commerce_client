@@ -1,13 +1,52 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Marquee from 'react-fast-marquee'
 import './Home.css'
 import Meta from '~/components/Meta'
 import BlogCard from '~/components/BlogCard'
 import ProductCard from '~/components/ProductCard'
-import SpecialProduct from '~/components/SpecialProduct'
 import PopularProduct from '~/components/PopularProduct'
 
+import { getAllProduct } from '../../features/product/productSlice'
+import { getAllBlog } from '../../features/blog/blogSlice'
+import { deletePreOrder } from '../../features/user/userSlice'
+
 const Home = () => {
+  const dispatch = useDispatch()
+
+  const userPreOrder = useSelector((state) => state.auth.preOrder)
+
+  if (userPreOrder.length > 0) {
+    dispatch(deletePreOrder())
+  }
+
+  const product = useSelector((state) => state.product.products)
+  const blog = useSelector((state) => state.blog.blogs)
+
+  useEffect(() => {
+    if (product.length === 0 && blog.length === 0) {
+      dispatch(getAllProduct())
+      dispatch(getAllBlog())
+    }
+  }, [])
+
+  let specialProduct = []
+  let popularProduct = []
+  let featuredProduct = []
+
+  product?.map((item) => {
+    if (item.tags === 'popular') {
+      popularProduct.push(item)
+    }
+    if (item.tags === 'special') {
+      specialProduct.push(item)
+    }
+    if (item.tags === 'featured') {
+      featuredProduct.push(item)
+    }
+  })
+
   return (
     <>
       <Meta title="BWL Official" />
@@ -225,10 +264,7 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard grid={3} data={featuredProduct} />
           </div>
         </div>
       </section>
@@ -296,26 +332,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* Special Product */}
-      <section className="special-wrapper home-wrapper-2 py-5">
-        <div className="container-xl">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="section-heading">Special Products</h3>
-            </div>
-          </div>
-          <div className="row">
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-          </div>
-        </div>
-      </section>
       {/* Product Card */}
-      <PopularProduct />
+      <PopularProduct data={popularProduct} />
       {/* Slider */}
       <section className="marque-wrapper home-wrapper-2 py-5">
         <div className="container-xl">
@@ -361,19 +379,8 @@ const Home = () => {
               <h3 className="section-heading">Our Latest Blogs</h3>
             </div>
           </div>
-          <div className="row">
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
+          <div className="mb-5">
+            <BlogCard data={blog} grid={3} />
           </div>
         </div>
       </section>
