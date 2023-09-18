@@ -8,7 +8,10 @@ import BlogCard from '~/components/BlogCard'
 import ProductCard from '~/components/ProductCard'
 import PopularProduct from '~/components/PopularProduct'
 
-import { getAllProduct } from '../../features/product/productSlice'
+import {
+  getPopularProduct,
+  getFeaturedProduct,
+} from '../../features/product/productSlice'
 import { getAllBlog } from '../../features/blog/blogSlice'
 import { deletePreOrder } from '../../features/user/userSlice'
 
@@ -21,31 +24,25 @@ const Home = () => {
     dispatch(deletePreOrder())
   }
 
-  const product = useSelector((state) => state.product.products)
+  const popularProduct = useSelector(
+    (state) => state.product.popularProducts.getProduct
+  )
+  const featuredProduct = useSelector(
+    (state) => state.product.featuredProducts.getProduct
+  )
   const blog = useSelector((state) => state.blog.blogs)
 
   useEffect(() => {
-    if (product.length === 0 && blog.length === 0) {
-      dispatch(getAllProduct())
-      dispatch(getAllBlog())
-    }
+    dispatch(getPopularProduct())
+    dispatch(getFeaturedProduct())
+    dispatch(getAllBlog())
   }, [])
 
-  let specialProduct = []
-  let popularProduct = []
-  let featuredProduct = []
+  let popularProductData = []
+  let featuredProductData = []
 
-  product?.map((item) => {
-    if (item.tags === 'popular') {
-      popularProduct.push(item)
-    }
-    if (item.tags === 'special') {
-      specialProduct.push(item)
-    }
-    if (item.tags === 'featured') {
-      featuredProduct.push(item)
-    }
-  })
+  popularProduct?.map((item) => popularProductData.push(item))
+  featuredProduct?.map((item) => featuredProductData.push(item))
 
   return (
     <>
@@ -264,7 +261,7 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <ProductCard grid={3} data={featuredProduct} />
+            <ProductCard grid={3} data={featuredProductData} />
           </div>
         </div>
       </section>
@@ -333,7 +330,7 @@ const Home = () => {
         </div>
       </section>
       {/* Product Card */}
-      <PopularProduct data={popularProduct} />
+      <PopularProduct data={popularProductData} />
       {/* Slider */}
       <section className="marque-wrapper home-wrapper-2 py-5">
         <div className="container-xl">

@@ -3,6 +3,7 @@ const routes = {
   about: '/about',
   contact: '/contact',
   ourStore: '/product',
+  ourStoreSearch: '/product/:slug',
   singleProduct: '/product/:id',
   blogs: '/blogs',
   singleBlog: '/blog/:id',

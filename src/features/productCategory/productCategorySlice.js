@@ -14,8 +14,20 @@ export const getAllCategory = createAsyncThunk(
   }
 )
 
+export const getAllBrand = createAsyncThunk(
+  'productCategory/get-all-brand',
+  async (thunkAPI) => {
+    try {
+      return await productCategoryService.getAllBrand()
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
 const initialState = {
   categories: [],
+  brands: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -38,6 +50,21 @@ const productCategorySlice = createSlice({
         state.categories = action.payload
       })
       .addCase(getAllCategory.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(getAllBrand.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getAllBrand.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        state.brands = action.payload
+      })
+      .addCase(getAllBrand.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.isSuccess = false

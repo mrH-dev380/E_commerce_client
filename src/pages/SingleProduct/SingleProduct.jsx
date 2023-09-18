@@ -14,7 +14,11 @@ import PopularProduct from '~/components/PopularProduct'
 import { getProductById } from '../../features/product/productSlice'
 import formatNumber from '../../utils/formatNumber'
 import noImage from '~/assets/images/noimage.png'
-import { addToWishlist, resetState } from '../../features/product/productSlice'
+import {
+  getPopularProduct,
+  addToWishlist,
+  resetState,
+} from '../../features/product/productSlice'
 import { getAllColor } from '../../features/color/colorSlice'
 import {
   addToCart,
@@ -60,13 +64,10 @@ const SingleProduct = () => {
       })
     )
 
-  const product = useSelector((state) => state.product.products)
-  let popularProduct = []
-  product?.map((item) => {
-    if (item.tags === 'popular') {
-      popularProduct.push(item)
-    }
-  })
+  // Get popular product
+  const popularProduct = useSelector((state) => state.product.popularProducts)
+  let popularProductData = []
+  popularProduct?.map((item) => popularProductData.push(item))
 
   const productId = location.pathname.split('/')[2]
 
@@ -74,6 +75,9 @@ const SingleProduct = () => {
     if (productId !== undefined) {
       dispatch(getProductById(productId))
       dispatch(getAllColor())
+    }
+    if (popularProduct.length === 0) {
+      dispatch(getPopularProduct())
     }
     let zoom = document.querySelector('.zoom')
     let imgZoom = document.getElementById('imgZoom')
@@ -152,6 +156,8 @@ const SingleProduct = () => {
 
     if (!user) {
       toast.error('Please login and try again')
+    } else if (productQuantity === 0) {
+      toast.info('This product is temporarily out of stock')
     } else if (findProdCart) {
       let prodInCart = cartData.filter((product) => product._id === productId)
       let filterColor = prodInCart.filter(
@@ -190,13 +196,18 @@ const SingleProduct = () => {
   }
 
   const buyProductNow = async () => {
-    await dispatch(
-      createPreOrder({
-        cart: [{ _id: productId, color: colorTitle, count: quantity }],
-      })
-    )
-    await dispatch(getPreOrder())
-    navigate('/check-out')
+    if (!user) {
+      toast.error('Please login and try again!')
+    } else {
+      await dispatch(deletePreOrder())
+      await dispatch(
+        createPreOrder({
+          cart: [{ _id: productId, color: colorTitle, count: quantity }],
+        })
+      )
+      await dispatch(getPreOrder())
+      navigate('/check-out')
+    }
   }
 
   const addWishlist = (productId) => {
@@ -456,7 +467,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
-      <PopularProduct data={popularProduct} />
+      <PopularProduct data={popularProductData} />
     </>
   )
 }

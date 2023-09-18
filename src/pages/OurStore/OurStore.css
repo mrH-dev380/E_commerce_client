@@ -124,3 +124,21 @@ li + li {
 .range-price .form-floating label {
   top: 0;
 }
+
+/* Pagination */
+.store-pagination {
+  display: flex;
+  justify-content: end;
+  margin-right: 12px;
+}
+
+.ant-pagination-options {
+  display: none !important;
+}
+
+.ant-pagination-item {
+  min-width: 36px;
+  height: 36px;
+  margin-inline-end: 10px;
+  line-height: 34px;
+}

@@ -1,30 +1,47 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { toast } from 'react-toastify'
+import { useThrottle } from '@uidotdev/usehooks'
 
 import './Header.css'
 import { getCart, getWishlist, logOut } from '../../../features/user/userSlice'
 import { getAllCategory } from '~/features/productCategory/productCategorySlice'
+import {
+  getAllProduct,
+  getPreviewProduct,
+} from '../../../features/product/productSlice'
 const Header = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const getUserFromLocalStorage = localStorage.getItem('token')
     ? JSON.parse(localStorage.getItem('token'))
     : null
   const user = !!getUserFromLocalStorage
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const [searchInput, setSearchInput] = useState()
+  const throttledValue = useThrottle(searchInput, 1500)
+  // const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    throttledValue && dispatch(getPreviewProduct(throttledValue))
+    if (!throttledValue && previewProduct) {
+      dispatch(getPreviewProduct(' '))
+    }
+  }, [throttledValue])
 
   const auth = useSelector((state) => state.auth.user)
-  const category = useSelector((state) => state.productCategory.categories)
+  const previewProduct = useSelector(
+    (state) => state.product.previewProducts.getProduct
+  )
 
   useEffect(() => {
     if (user === true && auth) {
       dispatch(getCart())
       dispatch(getWishlist())
     }
-    if (category.length === 0) dispatch(getAllCategory())
+    dispatch(getAllCategory())
   }, [user])
 
   const productCategories = useSelector(
@@ -38,6 +55,10 @@ const Header = () => {
     } else if (user) {
       navigate('/cart')
     }
+  }
+
+  const handleSelectCategory = async (e) => {
+    await dispatch(getAllProduct({ category: e }))
   }
 
   const handleLogOut = async () => {
@@ -79,13 +100,15 @@ const Header = () => {
               </h2>
             </div>
             <div className="col-5">
-              <div className="input-group">
+              <div className="input-group search-header">
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control search-header-input"
+                  style={{ fontSize: '14px' }}
                   placeholder="Search Product Now ..."
                   aria-label="Search Product Now ..."
                   aria-describedby="basic-addon2"
+                  onChange={(e) => setSearchInput(e.target.value)}
                 />
                 <span
                   className="input-group-text p-3"
@@ -94,6 +117,22 @@ const Header = () => {
                 >
                   <BsSearch className="fs-6" />
                 </span>
+                <ul className="dropdown-search">
+                  {previewProduct?.map((item) => {
+                    return (
+                      <li key={item.id} className="search-item-link">
+                        <a
+                          onClick={() => {
+                            navigate(`/product/${item._id}`)
+                            window.location.reload(true)
+                          }}
+                        >
+                          {item.title}
+                        </a>
+                      </li>
+                    )
+                  })}
+                </ul>
               </div>
             </div>
             <div className="col-5">
@@ -237,8 +276,15 @@ const Header = () => {
                     >
                       {productCategories.map((category) => {
                         return (
-                          <li key={category.id}>
-                            <Link className="dropdown-item text-white" to="#">
+                          <li
+                            key={category.id}
+                            onClick={() => handleSelectCategory(category.title)}
+                          >
+                            <Link
+                              className="dropdown-item text-white"
+                              to="/product"
+                              state={{ categoryState: category.title }}
+                            >
                               {category.title}
                             </Link>
                           </li>

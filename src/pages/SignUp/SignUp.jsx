@@ -3,7 +3,6 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { toast } from 'react-toastify'
 
 import './SignUp.css'
 import Container from '~/components/Container'
@@ -15,7 +14,7 @@ const SignUp = () => {
   const navigate = useNavigate()
 
   const newUser = useSelector((state) => state.auth)
-  const { isLoading, isSuccess, isError, newUserCreated } = newUser
+  const { isSuccess, newUserCreated } = newUser
 
   const formik = useFormik({
     initialValues: {
@@ -52,18 +51,15 @@ const SignUp = () => {
     onSubmit: (values) => {
       delete values.confirmPassword
       dispatch(register(values))
+      formik.resetForm()
     },
   })
 
   useEffect(() => {
     if (isSuccess && !!newUserCreated) {
-      toast.success('Register Successfully!')
       navigate('/login')
     }
-    if (isError) {
-      toast.error('Something Went Wrong!')
-    }
-  }, [isLoading, isSuccess, isError])
+  }, [isSuccess])
 
   return (
     <>

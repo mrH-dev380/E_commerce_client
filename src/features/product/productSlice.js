@@ -5,9 +5,42 @@ export const resetState = createAction('single_product_reset')
 
 export const getAllProduct = createAsyncThunk(
   'product/get-all-product',
+  async (filter, thunkAPI) => {
+    try {
+      return await productService.getAllProduct(filter)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
+export const getPreviewProduct = createAsyncThunk(
+  'product/get-preview-product',
+  async (searchInput, thunkAPI) => {
+    try {
+      return await productService.getPreviewProduct(searchInput)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
+export const getPopularProduct = createAsyncThunk(
+  'product/get-popular-product',
   async (thunkAPI) => {
     try {
-      return await productService.getAllProduct()
+      return await productService.getPopularProduct()
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
+export const getFeaturedProduct = createAsyncThunk(
+  'product/get-featured-product',
+  async (thunkAPI) => {
+    try {
+      return await productService.getFeaturedProduct()
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
     }
@@ -38,6 +71,9 @@ export const addToWishlist = createAsyncThunk(
 
 const initialState = {
   products: [],
+  previewProducts: [],
+  popularProducts: [],
+  featuredProducts: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -71,6 +107,51 @@ const productSlice = createSlice({
         state.products = action.payload
       })
       .addCase(getAllProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(getPreviewProduct.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getPreviewProduct.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        state.previewProducts = action.payload
+      })
+      .addCase(getPreviewProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(getPopularProduct.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getPopularProduct.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        state.popularProducts = action.payload
+      })
+      .addCase(getPopularProduct.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.error
+      })
+      .addCase(getFeaturedProduct.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getFeaturedProduct.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        state.featuredProducts = action.payload
+      })
+      .addCase(getFeaturedProduct.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.isSuccess = false

@@ -18,6 +18,7 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       navigate('/')
+      window.location.reload(true)
     }
   }, [user])
 
@@ -35,7 +36,6 @@ const Login = () => {
     onSubmit: async (values) => {
       // alert(JSON.stringify(values))
       await dispatch(login(values))
-      window.location.reload(true)
     },
   })
   return (

@@ -56,30 +56,34 @@ const ProductCard = (props) => {
   }
 
   const addProductCart = async (product) => {
-    const prodIdCart = []
-    cartData.map((prod) => prodIdCart.push(prod._id))
-    const findProdCart = prodIdCart.includes(product._id)
-
-    if (!user) {
-      toast.error('Please login and try again')
-    } else if (findProdCart && user) {
-      cartData.map((prod) => {
-        if (prod.color === product.color[0]) {
-          prod.count += 1
-        }
-      })
-      await dispatch(addToCart({ cart: cartData }))
-      dispatch(getCart())
-      toast.success('Add to Cart Successfully!')
+    if (product.quantity === 0) {
+      toast.info('This product is temporarily out of stock')
     } else {
-      cartData.push({
-        color: product.color[0],
-        count: 1,
-        _id: product._id,
-      })
-      await dispatch(addToCart({ cart: cartData }))
-      dispatch(getCart())
-      toast.success('Add to Cart Successfully!')
+      const prodIdCart = []
+      cartData.map((prod) => prodIdCart.push(prod._id))
+      const findProdCart = prodIdCart.includes(product._id)
+
+      if (!user) {
+        toast.error('Please login and try again')
+      } else if (findProdCart && user) {
+        cartData.map((prod) => {
+          if (prod.color === product.color[0]) {
+            prod.count += 1
+          }
+        })
+        await dispatch(addToCart({ cart: cartData }))
+        dispatch(getCart())
+        toast.success('Add to Cart Successfully!')
+      } else {
+        cartData.push({
+          color: product.color[0],
+          count: 1,
+          _id: product._id,
+        })
+        await dispatch(addToCart({ cart: cartData }))
+        dispatch(getCart())
+        toast.success('Add to Cart Successfully!')
+      }
     }
   }
 
@@ -112,7 +116,10 @@ const ProductCard = (props) => {
                     <img
                       src="../images/view.svg"
                       alt="view"
-                      onClick={() => navigate('/product/' + product?._id)}
+                      onClick={() => {
+                        navigate('/product/' + product?._id)
+                        window.location.reload(true)
+                      }}
                     />
                   </button>
                   <button className="border-0 bg-transparent">
