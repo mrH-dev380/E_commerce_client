@@ -6,7 +6,6 @@ const routes = {
   ourStoreSearch: '/product/:slug',
   singleProduct: '/product/:id',
   blogs: '/blogs',
-  singleBlog: '/blog/:id',
   compareProduct: '/compare-product',
   wishlist: '/wishlist',
   cart: '/cart',

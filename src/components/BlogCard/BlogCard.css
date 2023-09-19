@@ -29,13 +29,16 @@
 }
 
 .blog-content h5 {
-  display: block;
   text-align: left;
   font-size: 18px;
   color: var(--black-color);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
-.blog-content p.desc {
+.blog-content .desc {
   font-size: 13px;
   line-height: 22px;
   height: 44px;

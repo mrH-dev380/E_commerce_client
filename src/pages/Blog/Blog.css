@@ -1,3 +1,11 @@
 .blog-wrapper .row {
   align-items: unset;
 }
+
+.scroll-to-top {
+  font-size: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+}

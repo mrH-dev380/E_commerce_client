@@ -7,7 +7,6 @@ import Contact from '~/pages/Contact'
 import OurStore from '~/pages/OurStore'
 import SingleProduct from '~/pages/SingleProduct'
 import Blog from '~/pages/Blog'
-import SingleBlog from '~/pages/SingleBlog'
 import CompareProduct from '~/pages/CompareProduct'
 import Wishlist from '~/pages/Wishlist'
 import Cart from '~/pages/Cart'
@@ -31,7 +30,6 @@ const publicRoutes = [
   { path: config.routes.ourStore, component: OurStore },
   { path: config.routes.singleProduct, component: SingleProduct },
   { path: config.routes.blogs, component: Blog },
-  { path: config.routes.singleBlog, component: SingleBlog },
   { path: config.routes.compareProduct, component: CompareProduct },
   { path: config.routes.wishlist, component: Wishlist },
   { path: config.routes.cart, component: Cart },

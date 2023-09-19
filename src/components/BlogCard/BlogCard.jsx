@@ -6,13 +6,13 @@ import './BlogCard.css'
 import noImage from '../../assets/images/noimage.png'
 
 const BlogCard = (props) => {
-  let location = useLocation()
+  const location = useLocation()
   const { data, grid } = props
 
   let blogData = []
 
   if (location.pathname === '/') {
-    blogData = data.slice(0, 4)
+    blogData = data ? data.slice(0, 4) : []
   } else {
     blogData = data
   }
@@ -28,25 +28,23 @@ const BlogCard = (props) => {
           >
             <div className="card-image">
               <img
-                src={blog.images[0] || noImage}
+                src={blog.urlToImage || noImage}
                 className="img-fluid w-100"
                 alt="blog"
               />
             </div>
             <div className="blog-content">
               <p className="date">
-                {moment(blog.createdAt).format('MMMM Do YYYY, h:mm a')}
+                {moment(blog.publishedAt).format('MMMM Do YYYY, h:mm a')}
               </p>
               <h5 className="title">{blog.title}</h5>
-              <div
+              <p
                 className="desc"
-                dangerouslySetInnerHTML={{ __html: blog?.description }}
-              ></div>
-              <Link
-                to={{ pathname: `/blog/${blog.title}` }}
-                state={{ blogId: blog._id }}
-                className="button mt-3"
+                // dangerouslySetInnerHTML={{ __html: blog?.description }}
               >
+                {blog.content}
+              </p>
+              <Link to={blog.url} className="button mt-3" target="_blank">
                 Read More
               </Link>
             </div>

@@ -12,11 +12,11 @@ export const getAllBlog = createAsyncThunk(
   }
 )
 
-export const getBlogById = createAsyncThunk(
-  'blog/get-blog',
-  async (id, thunkAPI) => {
+export const getMoreBlog = createAsyncThunk(
+  'blog/get-more-blog',
+  async (data, thunkAPI) => {
     try {
-      return await blogService.getBlogById(id)
+      return await blogService.getMoreBlog(data)
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
     }
@@ -44,7 +44,7 @@ const blogSlide = createSlice({
         state.isError = false
         state.isLoading = false
         state.isSuccess = true
-        state.blogs = action.payload
+        state.blogs = action.payload.articles
       })
       .addCase(getAllBlog.rejected, (state, action) => {
         state.isError = true
@@ -52,19 +52,17 @@ const blogSlide = createSlice({
         state.message = action.error
         state.isLoading = false
       })
-      .addCase(getBlogById.pending, (state) => {
+      .addCase(getMoreBlog.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getBlogById.fulfilled, (state, action) => {
+      .addCase(getMoreBlog.fulfilled, (state, action) => {
         state.isError = false
         state.isLoading = false
         state.isSuccess = true
-        state.blogTitle = action.payload.title
-        state.blogDescription = action.payload.description
-        state.blogCategoryName = action.payload.category
-        state.blogImages = action.payload.images
+        const blogData = state.blogs.concat(action.payload.articles)
+        state.blogs = blogData
       })
-      .addCase(getBlogById.rejected, (state, action) => {
+      .addCase(getMoreBlog.rejected, (state, action) => {
         state.isError = true
         state.isSuccess = false
         state.message = action.error
