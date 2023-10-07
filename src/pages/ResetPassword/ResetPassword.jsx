@@ -86,7 +86,7 @@ const ResetPassword = () => {
             <div>
               <div className="my-3 d-flex justify-content-center gap-15 align-items-center">
                 <button type="submit" className="button border-0">
-                  Sign Up
+                  Confirm
                 </button>
               </div>
             </div>
