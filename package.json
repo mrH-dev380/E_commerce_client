@@ -13,6 +13,7 @@
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^1.9.5",
     "@uidotdev/usehooks": "^2.2.0",
+    "antd": "^5.9.4",
     "axios": "^1.4.0",
     "bootstrap": "^5.0.2",
     "formik": "^2.4.2",
