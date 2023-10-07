@@ -11,4 +11,9 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+  configureWebpack: {
+    performance: {
+      maxAssetSize: 500000, // Adjust to a higher limit if needed (e.g., 1 MB)
+    },
+  },
 })
