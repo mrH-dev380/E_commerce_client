@@ -67,7 +67,7 @@ const SingleProduct = () => {
   // Get popular product
   const popularProduct = useSelector((state) => state.product.popularProducts)
   let popularProductData = []
-  popularProduct?.map((item) => popularProductData.push(item))
+  popularProduct?.getProduct?.map((item) => popularProductData.push(item))
 
   const productId = location.pathname.split('/')[2]
 

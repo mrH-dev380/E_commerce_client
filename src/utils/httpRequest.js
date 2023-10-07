@@ -1,1 +1,1 @@
-export const httpRequest = 'http://localhost:3000/'
+export const httpRequest = 'https://mrh-ecommerce-api.onrender.com/'
